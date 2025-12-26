@@ -5,132 +5,345 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Nguyễn Hồ Nhật Tân | Thực Tập AI Engineer / Machine Learning</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background: linear-gradient(to bottom, #e0f7fa, #ffffff);
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        /* Hiệu ứng particle nền header */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
-            padding: 60px 20px;
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 5px solid white;
+            border: 8px solid rgba(255,255,255,0.4);
             object-fit: cover;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: all 0.6s ease;
+            animation: float 6s ease-in-out infinite;
         }
+
+        .avatar:hover {
+            transform: scale(1.15) rotate(8deg);
+            border-color: #00f2fe;
+            box-shadow: 0 25px 60px rgba(0,242,254,0.4);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
         h1 {
             margin: 10px 0;
-            font-size: 2.5em;
+            font-size: 3.5em;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
         }
+
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
         .job-title {
-            font-size: 1.4em;
-            margin: 10px 0;
-            font-weight: normal;
+            font-size: 1.8em;
+            margin: 20px 0;
+            font-weight: 500;
+            opacity: 0.95;
+            animation: fadeInUp 1.5s ease;
         }
+
         .contact {
-            margin: 15px 0;
-            font-size: 1.1em;
+            margin: 25px 0;
+            font-size: 1.3em;
+            animation: fadeInUp 2s ease;
         }
+
         .contact a {
             color: white;
             text-decoration: none;
+            position: relative;
+            transition: color 0.4s ease;
         }
+
+        .contact a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00f2fe;
+            transition: width 0.4s ease;
+        }
+
+        .contact a:hover {
+            color: #00f2fe;
+        }
+
+        .contact a:hover::after {
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .container {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 1100px;
+            margin: 50px auto;
             padding: 0 20px;
         }
+
         .section {
             background: white;
-            margin-bottom: 25px;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 35px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,242,254,0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .section.visible::before {
+            left: 100%;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .section h2 {
             color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            border-bottom: 5px solid #764ba2;
+            padding-bottom: 15px;
             margin-top: 0;
-            font-size: 1.6em;
+            font-size: 2em;
+            position: relative;
+            display: inline-block;
         }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: linear-gradient(to right, #00f2fe, #764ba2);
+            transition: width 0.8s ease;
+        }
+
+        .section.visible h2::after {
+            width: 120px;
+        }
+
         ul {
-            padding-left: 20px;
+            padding-left: 30px;
         }
+
+        li {
+            margin-bottom: 14px;
+            position: relative;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section.visible li:nth-child(1) { transition-delay: 0.2s; }
+        .section.visible li:nth-child(2) { transition-delay: 0.3s; }
+        .section.visible li:nth-child(3) { transition-delay: 0.4s; }
+        .section.visible li:nth-child(4) { transition-delay: 0.5s; }
+        .section.visible li:nth-child(5) { transition-delay: 0.6s; }
+
+        li::before {
+            content: '✦';
+            color: #00f2fe;
+            position: absolute;
+            left: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
         .skills-group {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(to right, #f8f9ff, #e8f5ff);
+            border-radius: 15px;
+            transition: transform 0.4s ease;
         }
+
+        .skills-group:hover {
+            transform: translateY(-10px);
+        }
+
         .skills-group h3 {
             color: #764ba2;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-        .project {
             margin-bottom: 20px;
-            padding-left: 10px;
-            border-left: 4px solid #667eea;
+            font-size: 1.5em;
+            border-left: 6px solid #00f2fe;
+            padding-left: 20px;
         }
+
+        .project {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffffff, #f0f8ff);
+            border-radius: 15px;
+            border-left: 8px solid #00f2fe;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,242,254,0.3);
+        }
+
         .project h3 {
-            margin: 0 0 8px 0;
+            margin: 0 0 12px 0;
             color: #333;
+            font-size: 1.6em;
         }
+
         .status {
             font-style: italic;
-            color: #666;
+            color: #ffffff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(118,75,162,0.3);
         }
+
         footer {
             text-align: center;
-            padding: 30px;
-            background: #333;
+            padding: 50px;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
             color: white;
-            margin-top: 50px;
+            margin-top: 80px;
+            font-size: 1.2em;
+            position: relative;
+            overflow: hidden;
         }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
-            header {
-                padding: 40px 15px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .container {
-                padding: 0 15px;
-            }
-            .section {
-                padding: 20px;
-            }
+            header { padding: 80px 15px 60px; }
+            h1 { font-size: 2.8em; }
+            .avatar { width: 140px; height: 140px; }
+            .container { padding: 0 15px; }
+            .section { padding: 30px; }
         }
     </style>
+    <!-- Thư viện particles.js cho hiệu ứng hạt nền -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-
     <header>
-        <img src="photo.jpg" alt="Ảnh cá nhân" class="avatar">
-        <h1>Nguyễn Hồ Nhật Tân</h1>
-        <p class="job-title">Ứng tuyển vị trí Thực Tập AI Engineer / Machine Learning</p>
-        <div class="contact">
-            <p>Email: 24130279@st.hcmuaf.edu.vn | SĐT: 0966 841 823</p>
-            <p>Bình Dương, Việt Nam</p>
+        <div id="particles-js"></div>
+        <div class="header-content">
+            <img src="your-photo.jpg" alt="Ảnh cá nhân" class="avatar">
+            <h1>Nguyễn Hồ Nhật Tân</h1>
+            <p class="job-title">Ứng tuyển vị trí Thực Tập AI Engineer / Machine Learning</p>
+            <div class="contact">
+                <p>Email: 24130279@st.hcmuaf.edu.vn | SĐT: 0966 841 823</p>
+                <p>Bình Dương, Việt Nam</p>
+            </div>
         </div>
     </header>
 
     <div class="container">
-
-        <!-- Mục tiêu nghề nghiệp -->
+        <!-- Các section giữ nguyên nội dung -->
         <div class="section">
             <h2>Mục Tiêu Nghề Nghiệp</h2>
             <p>Sinh viên năm 2 ngành Công nghệ Thông tin, sở hữu nền tảng lập trình Java. Hiện đang tự học Machine Learning và Artificial Intelligence qua các khóa học trực tuyến uy tín. Mong muốn tham gia thực tập AI Engineer để áp dụng kiến thức, học hỏi các công nghệ hiện đại như LLM, Langchain, Vector Database và đóng góp vào các dự án thực tế.</p>
         </div>
 
-        <!-- Học vấn -->
         <div class="section">
             <h2>Học Vấn</h2>
             <p><strong>Trường ĐH Nông Lâm TP.HCM</strong><br>
@@ -139,10 +352,8 @@
             <p><strong>Các môn học nổi bật:</strong> Lập trình hướng đối tượng Java, Cấu trúc dữ liệu & Giải thuật, Toán rời rạc, Xác suất thống kê, Toán cao cấp</p>
         </div>
 
-        <!-- Kỹ năng -->
         <div class="section">
             <h2>Kỹ Năng</h2>
-            
             <div class="skills-group">
                 <h3>A. Lập trình & Công cụ cơ bản</h3>
                 <ul>
@@ -151,7 +362,6 @@
                     <li>Eclipse</li>
                 </ul>
             </div>
-
             <div class="skills-group">
                 <h3>B. Machine Learning / AI (Đang tự học)</h3>
                 <ul>
@@ -161,7 +371,6 @@
                     <li>Hiểu các khái niệm: LLM, RAG, Vector Database, Embeddings</li>
                 </ul>
             </div>
-
             <div class="skills-group">
                 <h3>C. Kỹ năng khác</h3>
                 <ul>
@@ -172,10 +381,8 @@
             </div>
         </div>
 
-        <!-- Dự án -->
         <div class="section">
             <h2>Dự Án Cá Nhân</h2>
-            
             <div class="project">
                 <h3>Image Classification trên dataset MNIST <span class="status">(Đang phát triển – 2025)</span></h3>
                 <ul>
@@ -185,9 +392,8 @@
                     <li>Trạng thái: Đang hoàn thiện và thử nghiệm các kiến trúc CNN khác nhau.</li>
                 </ul>
             </div>
-                    </div>
+        </div>
 
-        <!-- Hoạt động tự học & Ngoại khóa -->
         <div class="section">
             <h2>Hoạt Động Tự Học & Ngoại Khóa</h2>
             <ul>
@@ -196,12 +402,48 @@
                 <li>Tham gia cộng đồng AI Vietnam và các group Machine Learning trên Facebook</li>
             </ul>
         </div>
-
     </div>
 
     <footer>
         <p>© 2025 Nguyễn Hồ Nhật Tân. CV ứng tuyển vị trí thực tập AI/ML.</p>
     </footer>
 
+    <script>
+        // Particles.js config - hiệu ứng hạt rơi nhẹ nhàng ở header
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Scroll reveal cho section và list items
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Trigger li animations sau khi section visible
+                    entry.target.querySelectorAll('li').forEach(li => {
+                        li.style.opacity = '1';
+                        li.style.transform = 'translateX(0)';
+                    });
+                }
+            });
+        }, { threshold: 0.15 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
 </body>
 </html>
